@@ -29,7 +29,7 @@ if (program.simulator == undefined) {
   process.exit(1);
 } else {
   var setLanguage = new SetiOSSimulatorLanguage();
-  setLanguage.setLanguageAndLocale(
+  setLanguage.setLocaleAndLanguage(
     program.simulator,
     program.locale,
     program.languages,

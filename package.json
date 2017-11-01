@@ -1,6 +1,6 @@
 {
   "name": "set-ios-simulator-language",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sets the language and locale of the specified Apple iOS Simulator",
   "main": "index.js",
   "scripts": {

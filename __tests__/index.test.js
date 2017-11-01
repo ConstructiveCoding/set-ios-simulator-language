@@ -17,9 +17,34 @@ describe('SetiOSSimulatorLanguage', function () {
       
       expect(data.AppleLanguages).toEqual(expectedLanguage);
       expect(data.AppleLocale).toEqual(expectedLocale);
-
     });
   }
+
+  describe('read methods', function () {
+    var SUT;
+    var simulatorId = '52A770EA-C9A5-407C-A168-5052E2D189B9';
+
+    beforeAll(function (done) {
+      SUT = new SetiOSSimulatorLanguage();
+      SUT.globalPreferencesPath = function () {
+        return __dirname + '/test.plist';
+      };
+
+      fs.copyFile(__dirname + '/sample.plist', __dirname + '/test.plist', done);
+    });
+    
+    afterAll(function (done) {
+      fs.unlink(__dirname + '/test.plist', done);
+    });
+
+    it('should return the list of languages in the preferences file', function () {
+      SUT.currentLanguage();
+    });
+
+    it('should return the locale from the preferences file', function () {
+      SUT.currentLocale();
+    });
+  });
 
   describe('setLocaleAndLanguage callback', function () {
     var SUT;

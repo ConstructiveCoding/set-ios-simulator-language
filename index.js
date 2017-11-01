@@ -13,7 +13,7 @@ function SetiOSSimulatorLanguage () {};
  * @param {string} language - The language to set on the Simulator, e.g. de
  * @param {SetiOSSimulatorLanguage~updateCallback} callback - The callback executed on completion
  */
-SetiOSSimulatorLanguage.prototype.setLanguageAndLocale = function setLanguageAndLocale(simulatorId, locale, language, callback) {
+SetiOSSimulatorLanguage.prototype.setLocaleAndLanguage = function setLocaleAndLanguage(simulatorId, locale, language, callback) {
   if (simulatorId == null || simulatorId == undefined) {
     simulatorId = '52A770EA-C9A5-407C-A168-5052E2D189B9';
   }
@@ -58,6 +58,29 @@ SetiOSSimulatorLanguage.prototype.setLanguageAndLocale = function setLanguageAnd
  */
 SetiOSSimulatorLanguage.prototype.globalPreferencesPath = function globalPreferencesPath(simulatorId) {
   return process.env['HOME'] + '/Library/Developer/CoreSimulator/Devices/' + simulatorId + '/data/Library/Preferences/.GlobalPreferences.plist'
+}
+
+/**
+ * Returns the current list of languages in the simulator preferences
+ * @returns {Array} The languages set in the simulator preferences file
+ */
+SetiOSSimulatorLanguage.prototype.currentLanguage = function currentLanguage(simulatorId) {
+  var preferencesPath = this.globalPreferencesPath(simulatorId);
+
+  var data = plist.readFileSync(preferencesPath);
+  return data.AppleLanguages;
+}
+
+/**
+ * Returns the current locale in the simulator preferences
+ * @returns {string} The locale set in the simulator preferences file
+ */
+SetiOSSimulatorLanguage.prototype.currentLocale = function currentLocale(simulatorId) {
+  var preferencesPath = this.globalPreferencesPath(simulatorId);
+
+  // Read data from a file (xml or binary) (asynchronous)
+  var data = plist.readFileSync(preferencesPath);
+  return data.AppleLocale;
 }
 
 module.exports = SetiOSSimulatorLanguage;

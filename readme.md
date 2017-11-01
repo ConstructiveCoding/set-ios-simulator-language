@@ -15,7 +15,6 @@ Set the language of any iOS simulator
 setiOSSimluatorLanguage --simulator <simulatorID> --locale de_DE --languages es,en
 ```
 
-
 ## Module Installation
 
 ```bash
